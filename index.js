@@ -152,13 +152,13 @@ function processFile(fileName, type) {
     data.forEach((line) => {
       const parts = line.split("|");
       const EstimatedIts = parseFloat(parts[0].trim()); 
-      const solutionsPerHour = parseFloat(parts[0].trim());
+      const solutionsPerHour = parseFloat(parts[1].trim());
       const timestamp = new Date(parts[2].trim()).getTime(); // Using the formatted timestamp
 
       processedData.push({
         time: Math.floor(timestamp / 1000), // Convert to UNIX timestamp
         EstimatedIts: EstimatedIts,
-        solutionsPerHour, solutionsPerHour
+        solutionsPerHour: solutionsPerHour
       });
     });
 

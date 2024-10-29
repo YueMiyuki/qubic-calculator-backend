@@ -124,12 +124,12 @@ function processFile(fileName, type) {
     // Process incoming data
     data.forEach((line) => {
       const parts = line.split("|");
-      const value = parseFloat(parts[0].trim()); 
       const timestamp = new Date(parts[2].trim()).getTime(); // Using the formatted timestamp
 
       processedData.push({
         time: Math.floor(timestamp / 1000), // Convert to UNIX timestamp
-        TotalCurrent: value,
+        TotalCurrent: parseFloat(parts[0].trim()),
+        totalScores: parseFloat(parts[1].trim())
       });
     });
 
@@ -205,7 +205,7 @@ app.get("/api/scores", (req, res) => {
 });
 
 // Start logging data every 10 minutes
-setInterval(logData, 1000); // 10 minutes
+setInterval(logData, 60 * 5 * 1000); // 10 minutes
 
 // Initial log on startup
 logData();
